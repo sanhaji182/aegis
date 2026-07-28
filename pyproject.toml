@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis"
+version = "1.0.0"
+description = "AEGIS — Uncensored Persona × Attack Triad Framework. Public CLI: aegis. Internal package: hermes. (海鸥 + INCES + gpt-5.6 fused triad.)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "xscope0", email = "xscope0@users.noreply.github.com" },
+]
+maintainers = [
+  { name = "xscope0", email = "xscope0@users.noreply.github.com" },
+]
+keywords = [
+    "prompt-engineering",
+    "jailbreak",
+    "uncensored",
+    "persona",
+    "ai-security",
+    "red-team",
+    "hermes",
+    "aegis",
+]
+dependencies = [
+    "cryptography>=41.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+    "httpx>=0.27.0",
+]
+
+# After `pip install -e .`, four commands land on $PATH:
+#   aegis         → public CLI entrypoint (aegis:main)
+#   aegis-cli     → Rich-table sub-commands
+#   hermes        → legacy alias, identical to aegis
+#   hermes-cli    → legacy alias, identical to aegis-cli
+#
+# The internal Python package stays `hermes` so anything that does
+# `import hermes` continues to work after the public rename.
+[project.scripts]
+aegis = "aegis:main"
+aegis-cli = "hermes.cli:main"
+hermes = "hermes.attack:main"
+hermes-cli = "hermes.cli:main"
+
+[tool.setuptools]
+packages = ["hermes"]
+
+[tool.setuptools.package-data]
+hermes = ["data/*.md", "data/*.json"]
+"aegis" = ["aegis.py"]

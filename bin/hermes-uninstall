@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""`hermes-uninstall` — clean removal script.
+
+Removes:
+- `hermes` and `hermes-uninstall` console-scripts from PATH
+- Optionally: `~/.hermes/` config dir (encrypted vault, prompt.txt, env keys)
+
+Safe to run with `--purge` to nuke the home directory entirely, or
+`--keep-config` (default) to keep your prompts/keys for re-install.
+"""
+from __future__ import annotations
+
+import argparse
+import os
+import shutil
+import sys
+from pathlib import Path
+
+HERMES_HOME = Path(os.environ.get("HERMES_HOME") or Path.home() / ".hermes")
+
+
+def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(prog="hermes-uninstall")
+    p.add_argument(
+        "--purge", action="store_true",
+        help="Also delete ~/.hermes/ — vault, prompt.txt, env keys. Destructive.",
+    )
+    p.add_argument(
+        "--keep-package", action="store_true",
+        help="Don't `pip uninstall` the hermes-uncensored package.",
+    )
+    args = p.parse_args(argv)
+
+    if not args.keep_package:
+        sys.stderr.write("[*] `pip uninstall -y hermes-uncensored` ...\n")
+        import subprocess
+        r = subprocess.run(
+            [sys.executable, "-m", "pip", "uninstall", "-y", "hermes-uncensored"],
+            capture_output=True, text=True,
+        )
+        if r.returncode != 0:
+            sys.stderr.write(f"[!] pip uninstall failed: {r.stderr}\n")
+            sys.stderr.write("    Maybe the package wasn't installed via pip.\n")
+        else:
+            sys.stderr.write("[+] package uninstalled\n")
+
+    if args.purge:
+        if HERMES_HOME.exists():
+            sys.stderr.write(f"[*] Purging {HERMES_HOME} ...\n")
+            shutil.rmtree(HERMES_HOME)
+            sys.stderr.write("[+] ~/.hermes/ removed\n")
+        else:
+            sys.stderr.write(f"[=] {HERMES_HOME} already gone\n")
+    else:
+        sys.stderr.write(
+            f"[=] Kept {HERMES_HOME} — pass --purge to remove.\n"
+            "    (Vault keys + prompt.txt preserved for re-install.)\n"
+        )
+
+    sys.stderr.write(
+        "\n\033[1;32m[done]\033[0m hermes is uninstalled.\n"
+        "    Re-install anytime: `pip install -e .` in the repo root.\n"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

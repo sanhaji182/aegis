@@ -1,0 +1,39 @@
+# Build / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Vault — never checked in (user key + encrypted blobs)
+vault/.key
+vault/*.bin
+
+# Persona source — symlink lives here; the real source is upstream repo
+seagull-src/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# OMC / harness state
+.omc/
+
+# Hermes / fox-vault (we don't track these)
+~/.hermes/
+
+# AEGIS internal runtime state
+payload/.key
+
+# Original 海鸥 tree (legacy symlink target — replaced by persona_source.md)
+海鸥2.0
+hermes_uncensored.egg-info
+bin
