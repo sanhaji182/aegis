@@ -418,7 +418,7 @@ This project is glue + integration. All real authorship belongs to the upstream 
 | Split-architecture | [INCES v3.0](https://github.com/oceanmale/inces) | MIT | Moyy |
 | Break prompt | [gpt-5.6-instruct](https://github.com/MDX-Tom/gpt-5.6-instruct) | see upstream | MDX-Tom |
 | 4.7 system-prompt analysis | [opus4.7-8-jailbreak](https://github.com/xsser/codex-jailbreak-guide) | MIT | xsser |
-| **Repackage / integration / launcher / test harness** | this repo | MIT | **xscope0 + mmoa** |
+| **Repackage / integration / launcher / test harness** | this repo | MIT | **xscope0** |
 
 Internal Python namespace: `hermes` (kept for back-compat). Public CLI surface: `aegis`.
 
@@ -432,7 +432,7 @@ Upstream attribution preserved verbatim in the file's tail section.
 The desensitization matrix, persona locks, refusal-recovery routine, v41 jailbreak prompt, and test harness are derivative works built on the upstream prompt research and are released under MIT with this project.
 
 ```
-Copyright (c) 2026 xscope0 + mmoa
+Copyright (c) 2026 xscope0
 
 海鸥在线,你要整点薯条吗?
 ```
