@@ -41,3 +41,5 @@ bin
 # Test harness artifacts
 runs/
 prompt.md.bak
+prompt.sonnet.md
+prompt.*.md
