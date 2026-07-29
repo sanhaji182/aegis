@@ -37,3 +37,7 @@ payload/.key
 海鸥2.0
 hermes_uncensored.egg-info
 bin
+
+# Test harness artifacts
+runs/
+prompt.md.bak
