@@ -103,8 +103,11 @@ def apply_system_prompt() -> tuple[bool, str]:
     src = CONFIG_YAML.read_text(encoding="utf-8")
 
     # Match `system_prompt: "<huge NERV block>"` — multiline quoted scalar
-    m = re.search(r'(^[ \t]*system_prompt:[ \t]*")(.*)("\n(  reasoning_effort:|terminal:))',
-                  src, re.DOTALL | re.MULTILINE)
+    m = re.search(
+        r"(^[ \t]*system_prompt:[ \t]*[\"'])(.*?)([\"']\n(?=[a-z_]))",
+        src, re.DOTALL | re.MULTILINE,
+    )
+
     if not m:
         # maybe already applied (literal block scalar style)
         if "system_prompt: |" in src and "海鸥在线,你要整点薯条吗?" in src:

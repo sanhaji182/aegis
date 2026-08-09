@@ -69,6 +69,11 @@ No API key for the prompt itself. No provider dependency. No running endpoint re
 | **Runtime fire** | `load_aegis.py` | `--fire URL` → POSTs triad to any OpenAI-compatible endpoint |
 | **Test harness** | `test_aegis.py` | fires `prompt.md`, scores 0..3, JSONL run logs |
 | **Auto-improver** | `loop_aegis.py` | classifies failures, injects category clauses, re-tests |
+| **Stream Guard** | `hermes/stream_guard.py` | real-time refusal detection + 5-rung auto-escalation |
+| **Fingerprinter** | `hermes/fingerprint.py` | model/provider/safety-tier detection from API patterns |
+| **Parallel Fire** | `hermes/aegis_parallel.py` | N-endpoint concurrent fire + ranking + head-to-head diff |
+| **V42 (nurut)** | `prompt_v42.md` / `prompt_v42_cn.md` | zero-normalization, zero-slot, absolute compliance prompt |
+| **V42 test** | `test_aegis_v42.py` | death-probe set (8 probes) + v41 vs v42 comparison mode |
 | **Per-platform launchers** | `platforms/` | macOS · Linux · Windows · Android (Termux) |
 
 ---
